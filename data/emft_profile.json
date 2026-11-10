@@ -1,0 +1,18 @@
+{
+  "journalName": "Emerging Markets Finance and Trade",
+  "publisher": "Taylor & Francis",
+  "issn": { "print": "1540-496X", "online": "1558-0938" },
+  "impactFactor": 3.2,
+  "quartile": "Q1",
+  "scope": ["emerging markets","finance","trade","capital markets","corporate governance","institutional economics","financial markets","international business","policy implications"],
+  "preferredFeatures": ["strong emerging-market context","clear policy relevance","robust econometric methods","mechanism tests","heterogeneity analysis","endogeneity treatment","structured abstract","clear contribution statement"],
+  "commonStructure": ["Abstract","Keywords","JEL Classification","Introduction","Literature Review and Hypotheses","Research Design","Variable Definitions","Data Sources","Empirical Findings","Baseline Regression","Mechanism Tests","Robustness Tests","Endogeneity Tests","Heterogeneity Analysis","Policy Implications","Conclusion","References"],
+  "preferredMethods": ["panel data regression","event study","difference-in-differences","PSM","IV regression","GMM","fixed effects","quantile regression"],
+  "preferredRegions": ["China","India","Brazil","Russia","Southeast Asia","BRICS","emerging Asia","frontier markets"],
+  "avgWordCount": 9500,
+  "avgTableCount": 7,
+  "avgReferenceCount": 45,
+  "styleNotes": ["Prefer direct empirical statements","Avoid overclaiming causality","Emphasize policy implications","Explain economic magnitude","Connect to emerging-market institutions","Report robustness and heterogeneity clearly"],
+  "hotTopics2025": ["green finance","digital finance","ESG","corporate governance","investor sentiment","fintech","carbon markets","supply chain finance","financial inclusion","crypto assets","AI and finance","geopolitical risk"],
+  "lastUpdated": "2026-04-27"
+}

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 中国科技论坛投稿适配度分析系统（MVP）
 
-## Getting Started
+面向中文学术论文作者的投稿前分析工具，提供：
+- 期刊画像
+- 近期主题趋势
+- 论文上传解析（docx/pdf/txt）
+- 编辑视角评分（100分，8维度）
+- 接收概率区间估计
+- 可点击逐条修改建议（右侧详情面板）
+- 报告导出（Markdown / HTML）
 
-First, run the development server:
+> 免责声明：本系统给出的接收概率为模型化估计，不代表期刊官方意见，不构成录用承诺。
+
+## 1. 安装依赖
+
+```bash
+npm install
+```
+
+## 2. 启动项目
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开：`http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3. 配置 ANTHROPIC_API_KEY（可选）
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. 复制环境变量文件：
+```bash
+cp .env.example .env.local
+```
+2. 在 `.env.local` 中填写：
+```env
+ANTHROPIC_API_KEY=your_key_here
+```
 
-## Learn More
+未配置时，系统自动使用内置规则评分引擎。
 
-To learn more about Next.js, take a look at the following resources:
+## 4. 上传论文
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+进入“上传论文”页面，支持：
+- `.docx`
+- `.pdf`
+- `.txt`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+系统将自动解析：标题、摘要、关键词、章节、参考文献，并生成评分与建议。
 
-## Deploy on Vercel
+## 5. 导出报告
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+进入“分析报告”页面，可导出：
+- Markdown
+- HTML
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 6. 手动导入《中国科技论坛》近期文章样本
+
+MVP 已内置示例主题数据（`data/zgkjlt_topics.json`）。
+若官网抓取失败，可使用两种方式：
+1. 直接编辑 `data/zgkjlt_topics.json` 覆盖样本数据。
+2. 调用 `POST /api/journal/import`，提交目录页 HTML 字符串进行标题提取。
+
+## 7. 目录结构（关键）
+
+- `app/`：页面与 API Routes
+- `components/`：侧栏、顶部状态栏
+- `lib/`：解析器、评分引擎、主题分析、AI provider
+- `types/`：核心 TypeScript 类型
+- `data/`：期刊画像与示例主题
+- `prisma/`：后续数据库持久化预留
+
+## 8. 核心规则评分维度（100分）
+
+1. 主题契合度（20）
+2. 问题意识（15）
+3. 理论贡献（15）
+4. 研究设计（15）
+5. 论证逻辑（10）
+6. 语言表达（10）
+7. 格式规范（10）
+8. 期刊风格匹配度（5）
+
+## 9. 安全与合规说明
+
+- 不保证录用
+- 不生成虚假参考文献
+- 不鼓励伪造数据
+- 仅在本地分析上传内容；仅在用户配置 API Key 后才会调用外部模型
+- 官网抓取失败时建议手动导入，不绕过网站限制
